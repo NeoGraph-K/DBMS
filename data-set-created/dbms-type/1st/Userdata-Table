@@ -1,0 +1,1 @@
+Create Table UserTable (index number(10) Not Null, registnumber char(14) Not Null, name nvarchar2(20) Not Null);
