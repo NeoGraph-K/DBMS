@@ -273,3 +273,37 @@
         2. to_char(숫자 or 날짜, 형식) - 숫자나 날짜를 문장으로 변환
         3. to_number(문장) - 숫자를 포함하는 문장을 숫자로 변환
         4. to_date(문장, 형식) - 문장을 날짜로 변환
+## DBMS 6일차
+1. 집계 함수
+    1. SUM - 칼럼 총합
+    2. MAX - 칼럼 최대
+    3. MIN - 칼럼 최소
+    4. AVG - 칼럼 평균
+    5. COUNT - 칼럼 개수
+2. Group By
+    1. select 중복칼러명(group by 지정 칼럼), 집계 칼럼 from 테이블 group by 중복칼럼;
+    2. 동일 칼럼끼리 그룹화
+3. Having
+    1. select 중복칼럼명(group by 지정 칼럼), 집계 칼럼 form 테이블 group by 중복칼럼 having 집계 조건절;
+    2. 집계 함수를 이용한 조건 검색 가능
+4. 검색 순서
+    1. select 칼럼 from 테이블명 where 데이터 조건절 group by 데이터 그룹화 칼럼명 having 집계 조건절;
+5. 집합
+    1. UNION - 합집합
+        1. select * from 테이블 union select * from 테이블; - 중복 제거
+        2. select * from 테이블 union all select * from 테이블; - 중복 비제거
+    2. INTERSECT - 교집합
+        1. select * from 테이블 intersect select * from 테이블;
+    3. MINUS - 차집합
+        1. select * from 테이블 minus select * from 테이블; - 앞 테이블 검색 결과에서 뒤 테이블 검색 결과 제외
+6. CASE 조건
+    1. 오라클에는 DECODE가 있지만 CASE가 가독성이 뛰어나며 다른 곳에서도 호환성이 뛰어남
+    2. IF 문
+        1. select case when 조건절 then 결과 when 조건절 then 결과 else 결과 end as 칼럼별명 from 테이블명;
+        2. else 생략 가능 생략시 조건 결과가 없으면 NULL
+    3. SWITCH 문
+        1. select case 칼럼명 when 조건값 then 결과 when 조건값 then 결과 else 결과 end as 칼럼별명 from 테이블명;
+        2. 단순 값만 비교시 훨씬 뛰어난 가독성
+    4. where 절에서도 사용 가능
+    5. 내장 함수를 조건절로 사용 가능
+    6. then 결과절에 중첩으로 case 사용 가능
