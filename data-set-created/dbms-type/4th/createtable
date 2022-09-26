@@ -1,0 +1,28 @@
+create table univercity(
+    keycode number(10) primary key,
+    name nvarchar2(32) unique not null
+);
+
+create table major(
+    keycode number(10) primary key,
+    name nvarchar2(32) unique not null
+);
+
+create table people(
+    keycode number(10) primary key,
+    name nvarchar2(32) not null,
+    registnumber nvarchar2(14) not null,
+    phone nvarchar2(13) not null,
+    location nvarchar2(32) not null
+);
+
+create table student(
+    people number(10) primary key,
+    univercity number(10) not null,
+    major number(10) not null,
+    grade number(3) not null,
+    score number(6) not null,
+    constraint fk_student_people foreign key (people) references people(keycode) on delete cascade,
+    constraint fk_student_univercity foreign key (univercity) references univercity(keycode) on delete cascade,
+    constraint fk_student_major foreign key (major) references major(keycode) on delete cascade
+);
