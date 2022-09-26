@@ -326,3 +326,40 @@
             1. select * from table1 left outer join table2 on column1 = column2; - 왼쪽
             2. select * from table1 right outer join table2 on column1 = column2; - 오른쪽
             3. select * from table1 full outer join table2 on column1 = column2; - 전체
+## DBMS 8일차
+1. 서브쿼리
+    1. 질의문 안의 또 다른 질의문
+    2. 단일 행 또는 복수 행 비교 가능
+    3. ORDER BY 정렬 불가능
+    4. 사용 가능한 범위 - select, from, where, having, order by, insert into values, update set
+    5. where 절과 같이 단일 행과 비교하는 연산은 서브쿼리의 결과가 2개 이상이면 오류
+    6. 서브쿼리의 결과가 2개 이상일 확률이 있다면 in, all, any, exists를 사용
+        1. A IN 서브쿼리 - 서브쿼리중 A가 존재
+        2. A 연산자 ANY 서브쿼리 - A 와 연산이 가능한 것이 서브쿼리 결과물에 존재
+        3. A 연산자 ALL 서브쿼리 - A 와 연산이 가능한 것만 서브쿼리 결과물에 존재
+        4. where exists(서브쿼리) - 서브쿼리에 결과물이 1개 이상 존재
+        5. where not exists(서브쿼리) - 서브쿼리에 결과물이 0개 존재
+    7. 다중 칼럼 서브 쿼리
+        1. 서브쿼리의 결과물이 한개의 칼럼이 아닌 여러개의 칼럼이 나오는 경우
+        2. where (칼럼1, 칼럼2) IN (SELECT 칼럼1, 칼럼2 FROM 테이블2 WHERE 칼럼2조건) 과 같이 사용
+    8. 연관 서브쿼리
+        1. 서브쿼리 내부에서 메인쿼리의 컬럼이 사용되는 경우
+        2. select * from 테이블1 where 테이블1.칼럼1 in (select 테이블2.칼럼1 from 테이블2 where 테이블2.칼럼1 = 테이블1.칼럼1)
+2. 시퀀스
+    1. 자동으로 변화하는 값을 매기는 장치
+    2. 증가, 감소량을 지정 가능
+    3. 시퀀스 옵션
+        1. increment by 값 - 시퀀스 실행 시 변화 량
+        2. start with 값 - 시퀀스의 시작 값(minvalue 와 maxvalue 사이의 값이어야 함)
+        3. minvalue 값 - 최소 값
+        4. maxvalue 값 - 최대 값
+        5. nocycle | cycle - 시퀀스의 반복 여부
+        6. nocache | cache 값 - 시퀀스가 값을 미리 할당하는지 여부, 동시 사용자가 많을 수록 유리
+        7. noorder | order - 요청 순서대로 값을 생성, 발생 순서 보장, 시스템 부하
+    4. create sequence 시퀀스명 increment by 값 start with 값 minvalue 값 maxvalue 값 nocycle nocache noorder;
+    5. 시퀀스명.nextval - 시퀀스의 값을 구하며 값을 변화시킴
+    6. 시퀀스명.currval - 시퀀스의 값을 구함
+    7. alter sequence 시퀀스명 옵션명 값 - 시퀀스의 옵션 변경
+    8. drop sequence 시퀀스명 - 시퀀스 삭제
+## DBMS 9일차
+## DBMS 10일차
