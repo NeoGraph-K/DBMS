@@ -307,3 +307,22 @@
     4. where 절에서도 사용 가능
     5. 내장 함수를 조건절로 사용 가능
     6. then 결과절에 중첩으로 case 사용 가능
+## DBMS 7일차
+1. 조인
+    1. 두개 이상의 테이블을 칼럼값에 따라 조합하는 방식
+    2. 내부 조인
+        1. 동일한 데이터를 가진 테이블의 교차값만 검색
+        2. 일반 방식
+            1. select * from table1, table2 where column1 = column2;
+        3. ANSI 방식
+            1. select * from table1 inner join table2 on column1 = column2; - 칼럼명 다를때
+            2. select * from table1 inner join table2 using(columnname) - 칼럼명 같을때
+    3. 외부 조인
+        1. 테이블의 비어있는 데이터를 NULL로 채우고 검색
+        2. 일반 방식
+            1. select * from table1, table2 where column1 = column2(+); - 오른쪽
+            2. select * from table1, table2 where column1(+) = column2; - 왼쪽
+        3. ANSI 방식
+            1. select * from table1 left outer join table2 on column1 = column2; - 왼쪽
+            2. select * from table1 right outer join table2 on column1 = column2; - 오른쪽
+            3. select * from table1 full outer join table2 on column1 = column2; - 전체
