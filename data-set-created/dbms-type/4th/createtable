@@ -16,13 +16,40 @@ create table people(
     location nvarchar2(32) not null
 );
 
+create table alba(
+    keycode number(10) primary key,
+    name nvarchar2(32) not null
+);
+
+create table academy(
+    keycode number(10) primary key,
+    name nvarchar2(32) not null
+);
+
 create table student(
     people number(10) primary key,
     univercity number(10) not null,
     major number(10) not null,
     grade number(3) not null,
-    score number(6) not null,
+    score number(6,3) not null,
     constraint fk_student_people foreign key (people) references people(keycode) on delete cascade,
     constraint fk_student_univercity foreign key (univercity) references univercity(keycode) on delete cascade,
     constraint fk_student_major foreign key (major) references major(keycode) on delete cascade
+);
+
+create table academy_student(
+    people number(10) primary key,
+    academy number(10) not null,
+    cost number(10) not null,
+    constraint fk_academy_student_people foreign key (people) references people(keycode) on delete cascade,
+    constraint fk_academy_student_academy foreign key (academy) references academy(keycode) on delete cascade
+);
+
+create table employee(
+    people number(10) primary key,
+    alba number(10) not null,
+    wage number(10) not null,
+    career number(6,3) not null,
+    constraint fk_employee_people foreign key (people) references people(keycode) on delete cascade,
+    constraint fk_employee_alba foreign key (alba) references alba(keycode) on delete cascade
 );
