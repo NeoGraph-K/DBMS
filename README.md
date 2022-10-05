@@ -362,4 +362,66 @@
     7. alter sequence 시퀀스명 옵션명 값 - 시퀀스의 옵션 변경
     8. drop sequence 시퀀스명 - 시퀀스 삭제
 ## DBMS 9일차
+1. 뷰
+    1. 테이블과 비슷한 가상의 테이블
+    2. 불필요한 정보 제외하여 필요한 정보만 접근하도록 제한
+    3. 복잡한 쿼리(서브, 집합 등)를 단순화
+    4. create [or replace] [force|noforece] view 뷰이름 [(column_aliases)] as select 질의문 [with read only] [with check option [constraint 제약조건명]];
+        1. or replace - 뷰 수정시 drop 으로 제거한 후 다시 만들 필요가 없는 기능
+            1. create or replace 로 지정시 이름의 뷰가 없으면 생성, 있으면 수정
+        2. force - 뷰 생성시 테이블, 컬럼, 함수등이 없어도 생성 가능
+            1. 쿼리문에 적는 테이블, 컬럼, 함수등이 없어도 오류는 생기지만 뷰는 생성
+            2. invalid 상태이기 때문에 뷰는 동작하지 않음
+            3. 미리 뷰를 작성할때 유용한 옵션
+        3. noforce - 뷰 생성시 테이블, 컬럼, 함수등이 있어야 생성 가능
+        4. column_aliases - 테이블 생성할 때 칼럼명 적듯 뷰의 칼럼명을 순서대로 미리 지정
+            1. create or replace view test_view (a,b,c,d) as select q,w,e,r from test_table;
+        5. with read only - 읽기 전용 옵션
+            1. select로만 사용하는 view를 만들때 쓰는 옵션
+        6. with check option - where절의 조건 명시
+            1. insert, update, delete시 where절의 조건이 자동으로 제약되도록 만드는 조건
+            2. create or replace view test_view as select * from test_table where score = 10 with check option;
+                1. score가 10점인 대상만 insert, update, delete가 동작 가능하도록 뷰 구성
+                2. insert into test_view(score) vlaues(20) - 는 where절의 =10과 다르므로 오류
+    5. 단순 뷰
+        1. create or replace view test_view as select * from test_table;
+        2. 일반적인 칼럼 나열
+        3. 조인, 함수, group by, 집합 등을 사용하지 않음
+        4. select, insert, update, delete 자유롭게 사용
+    6. 복합 뷰
+        1. create or replace view text_view as select score from test_student;
+        2. 복잡한 테이블의 연결 나열
+        3. 조인, 함수, group by, 집합 등을 사용
+        4. select 검색만 가능
+        5. 상황에 따라 insert, update, delete가 사용 가능
+    7. 뷰 코멘트
+        1. comment on column 뷰이름.칼럼명 is '코멘트';
+    8. 뷰 삭제
+        1. drop view 뷰이름;
+2. 인덱스
+    1. 데이터의 검색 속도 향상을 위해 수많은 자료구조로 미리 정렬시키는 문법
+    2. create [unique] index 인덱스명 on 테이블명(컬럼1,컬럼2,...);
+    3. 인덱스 조회
+        1. select * from user_indexes where table_name = 테이블이름;
+        2. select * from all_ind_columns where table_name = 테이블이름;
+    4. drop index 인덱스명 - 인덱스 제거
+    5. alter index 인덱스명 rename to 바꿀인덱스명 - 인덱스 이름 변경
+    6. 인덱스의 구성 칼럼 변경은 불가능 하므로 drop으로 제거 후 다시 생성
+    7. alter index 인덱스명 rebuild - 인덱스 리빌드
+        1. 자료구조를 속도가 빠르도록 재구성
+    8. 전체 인덱스 리빌드
+        1. select 'alter index '||index_name||' rebuild;' from user_indexes;
+3. 세이브 포인트
+    1. commit
+        1. 현재 트랜잭션(작업 환경)의 모든 사항을 최종 저장
+        2. 커밋시 트랜잭션이 닫히고 새로 열림
+    2. rollback
+        1. 현재 트랜잭션을 처음 상태로 되돌림
+        2. 롤백시 작업하던 모든 데이터가 되돌아감
+    3. savepoint 포인트명
+        1. 현재 트랜잭션 내부에 작은 저장지점을 생성
+        2. 임시 저장 지점이기에 커밋시 사라짐
+    4. rollback to savepoint 포인트명
+        1. 현재 트랜잭션 내부에 존재하는 임시 저장 지점으로 되돌림
+        2. 세이브 포인트 이후에 작업한 데이터만 되돌아감
 ## DBMS 10일차
