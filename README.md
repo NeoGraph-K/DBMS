@@ -50,17 +50,17 @@
     1. Commit;
 ## DBMS 2일차
 1. 사용자 생성 및 권한 부여
-    1. CMD Oracle 접속
-        1. CMD 실행
-        2. sqlplus 입력
-        3. 아이디 및 비밀번호 입력
-    2. 사용자 생성 및 삭제
+    1. 사용자 생성 및 삭제
         1. 관리자 권한 접속
             1. conn/as sysdba
         2. 생성 및 삭제
             1. create user 유저이름 identified by 비밀번호
             2. drop user 유저이름 cascade
-    3. 사용자 권한 부여 및 회수
+        3. 12c 버전 이후부터 유저이름 앞에 c##을 붙여야 생성 가능
+            1. create user c##ID identified by password;
+        4. 만약 붙이기 싫다면 _oracle_script 설정을 true로 변경하면 가능
+            1. alter session set "_ORACLE_SCRIPT" = TRUE;
+    2. 사용자 권한 부여 및 회수
         1. 모든 권한 주기
             1. grant connect, dba, resource to 유저
         1. grant 권한1, 권한2, ... to 권한유저
@@ -84,9 +84,9 @@
                 4. select - 테이블, 뷰
                 5. update - 테이블, 뷰
                 6. delete - 테이블, 뷰
-    4. 트랜잭션 적용
+    3. 트랜잭션 적용
         1. commit;
-    5. 유저 확인
+    4. 유저 확인
         1. select * from all_users;
 2. 테이블 생성
     1. create table 테이블이름(이름 타입(크기) 옵션, ...);
