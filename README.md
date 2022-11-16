@@ -113,7 +113,7 @@
         4. constraint 제약조건이름 check (제약 칼럼 및 조건)
         5. constraint 제약조건이름 foreign key (제약 칼럼) references 다른테이블 (다른테이블 칼럼) on delete cascade
     4. 제약조건 조회
-        1. select * from all_constraints where table_name = 테이블이름
+        1. select * from all_constraints where table_name = 유저명.테이블이름
     5. 코멘트
         1. comment on table 테이블명 is 코멘트 - 테이블 설명
         2. comment on column 테이블명.칼럼명 is 코멘트 - 칼럼 설명
