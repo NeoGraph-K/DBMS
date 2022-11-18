@@ -171,8 +171,8 @@
 1. 데이터 삽입
     1. insert into 테이블(칼럼명1,칼럼명2, ...) values(데이터1,데이터2,...);
     2. insert into 테이블 values(데이터1,데이터2,...);
-    3. insert all when 조건 then into 테이블1 values(데이터1,데이터2,...) else into 테이블2 values(데이터1,데이터2,...) 서브쿼리(select 칼럼 from 테이블 where 조건);
-    4. insert first when 조건 then into 테이블1 values(데이터1,데이터2,...) else into 테이블2 values(데이터1,데이터2,...) 서브쿼리(select 칼럼 from 테이블 where 조건);
+    3. insert all when 조건 then into 테이블1 values(데이터1,데이터2,...) else into 테이블2 values(데이터1,데이터2,...) from 서브쿼리(select 칼럼 from 테이블 where 조건);
+    4. insert first when 조건 then into 테이블1 values(데이터1,데이터2,...) else into 테이블2 values(데이터1,데이터2,...) from 서브쿼리(select 칼럼 from 테이블 where 조건);
 2. 데이터 검색
     1. select 칼럼 from 테이블;
     2. select 테이블1.칼럼, 테이블2.칼럼 from 테이블1,테이블2;
